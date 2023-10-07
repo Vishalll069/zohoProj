@@ -71,7 +71,7 @@ public class HolidayController {
 		return ResponseEntity.ok(generalResponse);
 	}
 	
-	@GetMapping("/getAllBirthdayHolidays")
+	@GetMapping("/getAllHolidays")
 	ResponseEntity<GeneralResponse> getAllBirthdayHolidaysBy(Principal user) throws HolidayException, EmployeeException {
 
 		var generalResponse = new GeneralResponse();

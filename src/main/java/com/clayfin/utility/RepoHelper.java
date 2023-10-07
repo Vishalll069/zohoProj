@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.clayfin.dto.DayAttendanceDto;
+import com.clayfin.dto.HolidayDto;
 import com.clayfin.dto.RegularizeDTO;
 import com.clayfin.entity.Attendance;
 import com.clayfin.entity.Employee;
+import com.clayfin.entity.Holidays;
 import com.clayfin.entity.LeaveRecord;
 import com.clayfin.enums.AttendanceStatus;
 import com.clayfin.enums.LeaveStatus;
@@ -25,6 +27,7 @@ import com.clayfin.repository.AttendenceRepo;
 import com.clayfin.repository.CandidateRepo;
 import com.clayfin.repository.EmployeeProfileRepo;
 import com.clayfin.repository.EmployeeRepo;
+import com.clayfin.repository.HolidayRepo;
 import com.clayfin.repository.LeaveRepo;
 import com.clayfin.repository.TaskRepo;
 
@@ -48,11 +51,33 @@ public class RepoHelper {
 
 	@Autowired
 	private AttendenceRepo attendanceRepo;
+	
+	@Autowired
+	private HolidayRepo holidayRepo;
 
 	public Boolean isEmployeeExist(Integer employeeId) {
 		return employeeRepo.findById(employeeId).isPresent();
 	}
 	
+	public Boolean isHolidayExistById(Integer holidayId) {
+		return holidayRepo.findById(holidayId).isPresent();
+	}
+	
+	
+	
+	
+	public Boolean isHolidayExistByDate(Holidays holiday) {
+		List<Holidays> holidays =  holidayRepo.findAll();
+		if(holidays.size()!=0) {
+			for(Holidays holidayOld: holidays) {
+				if(holiday.getDateOfHoliday().equals(holidayOld.getDateOfHoliday())){
+					return true;
+				}
+			}
+		}
+		return false;
+		
+	}
 	
 	
 	public Boolean isCandidateExist(Integer candidateId) {

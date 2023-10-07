@@ -1,41 +1,39 @@
 package com.clayfin.entity;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
-public class Attendance{
-
+@Setter
+@Getter
+public class LeaveTracker {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer attendanceId;
-	private LocalDate date;
+	Integer id;
 	
+	@JsonIgnore
+	private Integer availablePrivilegeLeave;
 	
-	private LocalTime checkInTimestamp;
+	@JsonIgnore
+	private Integer bookedPrivilegeLeave;
 	
-	private LocalTime CheckOutTimestamp;
-	private LocalTime spentHours;
+	@JsonIgnore
+	private Integer lopTaken;
 	
-
-	@ManyToOne
-	@JoinColumn(name="employee_id")
+	@JsonIgnore
+	private Integer compensatoryOff;
+	
+	@OneToOne
 	@JsonIgnore
 	private Employee employee;
 	
-
 }

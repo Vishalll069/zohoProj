@@ -31,7 +31,7 @@ public class Task {
 	private Integer taskId;
 	private String taskDescription;
 	private LocalDateTime assignedTime;
-
+	private LocalDateTime deadlineTime;
 	@Enumerated(EnumType.STRING)
 	private TaskStatus status;
 	
